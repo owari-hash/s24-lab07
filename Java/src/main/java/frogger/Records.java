@@ -4,42 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Refactor Task 2.
- *
- * @author Zishen Wen (F22), Deyuan Chen (S22)
+ * Manages records of Frogger's movements.
  */
 public class Records {
-    private final List<String[]> records;
 
-    public Records() {
-        this.records = new ArrayList<>();
-    }
+    private final List<String> recordList = new ArrayList<>();
 
     /**
-     * Adds a frogger's record.
+     * Adds a record of Frogger's movement.
      *
-     * @param firstName   first name of the frogger
-     * @param lastName    last name of the frogger
-     * @param phoneNumber phone number of the frogger
-     * @param zipCode     zip code of the frogger
-     * @param state       state of the frogger
-     * @param gender      gender of the frogger
-     * @return Return false if the record has existed. Else, return true.
+     * @return true if record successful, else false.
      */
-    public boolean addRecord(String firstName, String lastName, String phoneNumber,
-                             String zipCode, String state, String gender) {
-        for (String[] row : this.records) {
-            if (row[0].equals(firstName)
-                    && row[1].equals(lastName)
-                    && row[2].equals(phoneNumber)
-                    && row[3].equals(zipCode)
-                    && row[4].equals(state)
-                    && row[5].equals(gender)) {
-                return false;
-            }
-        }
-        this.records.add(
-                new String[]{firstName, lastName, phoneNumber, zipCode, state, gender});
-        return true;
+    public boolean addRecord(String firstName, String lastName, String phoneNumber, String zipCode, String state,
+            String gender, int position) {
+        String record = String.format("Frogger %s %s moved to position %d (Phone: %s, Zip: %s, State: %s, Gender: %s)",
+                firstName, lastName, position, phoneNumber, zipCode, state, gender);
+        return recordList.add(record);
+    }
+
+    public List<String> getRecords() {
+        return new ArrayList<>(recordList);
     }
 }
